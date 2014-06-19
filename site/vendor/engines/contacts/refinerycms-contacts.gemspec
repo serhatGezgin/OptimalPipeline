@@ -1,4 +1,5 @@
 Gem::Specification.new do |s|
+  s.authors           = ['Paul Coyle']
   s.platform          = Gem::Platform::RUBY
   s.name              = 'refinerycms-contacts'
   s.version           = '1.0'
