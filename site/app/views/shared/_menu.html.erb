@@ -1,0 +1,33 @@
+<%
+  # Collect the root items.
+  # Refinery::Menu is smart enough to remember all of the items in the original collection.
+  if (roots = local_assigns[:roots] || (collection ||= @menu_pages).roots).present?
+  
+  # In our design we don't hide the children
+  # hide_children = RefinerySetting.find_or_set(:menu_hide_children, false) if hide_children.nil?
+-%>
+<nav>
+  <ul>
+    <%= render :partial => '/shared/menu_branch', :collection => roots,
+               :locals => {
+                 :hide_children => false,
+                 :sibling_count => (roots.length - 1),
+               } -%>
+    <%- if Library.count > 0 %>
+    <li>
+      <%= link_to "Resources", library_path(Library.public.first) %>
+      <div>
+        <ul>
+          <%=raw draw_list_links(:menu_res_links_before) %>
+          <%- Library.public.each do |lib| %>
+          <li><%= link_to lib.name, library_path(lib) %></li>
+          <%- end %>
+          <%# This is a hack to get a page linked in and appear as though its part of libraries %>
+          <li><%= link_to "Links", library_path("links") %></li>
+        </ul>
+      </div>
+    </li>
+    <%- end %>
+  </ul>
+</nav>
+<% end -%>

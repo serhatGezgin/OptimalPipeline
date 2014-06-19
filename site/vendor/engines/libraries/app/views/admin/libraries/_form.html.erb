@@ -1,0 +1,29 @@
+<%= form_for [:admin, @library] do |f| -%>
+  <%= render :partial => "/shared/admin/error_messages", :locals => {
+          :object => @library,
+          :include_object_name => true
+        } %>
+  
+  <div class='field'>
+    <%= f.label :name -%>
+    <%= f.text_field :name, :class => 'larger widest'  -%>
+  </div>
+  
+  <div class='field'>
+    <%= f.label :short_desc -%>
+    <%= f.text_area :short_desc, :class => "wymeditor widest" -%>
+  </div>
+  
+  <div class='field'>
+    <%= f.label :public -%>
+    <%= f.check_box :public, :checked => @library[:public]  -%>
+  </div>
+  
+  <%= render :partial => "/shared/admin/form_actions",
+              :locals => {
+                :f => f,
+                :continue_editing => false,
+                :delete_title => t('delete', :scope => 'admin.libraries.library'),
+                :delete_confirmation => t('message', :scope => 'shared.admin.delete', :title => @library.name)
+              } %>
+<% end -%>

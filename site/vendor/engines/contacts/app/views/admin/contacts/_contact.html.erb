@@ -1,0 +1,34 @@
+<li class="<%= cycle("on", "on-hover") %>">
+  <ul>
+  <%- if contact.is_demo %>
+    <li><strong>DEMO REQUEST</strong></li>
+  <%- end %>
+    <li><strong>Submitted:</strong> <%= contact.created_at %></li>
+    <li><strong>From:</strong> <%= mail_to contact.email, contact.name %></li>
+  <%- if contact.title.present? %>
+    <li><strong>Title:</strong> <%= contact.title %></li>
+  <%- end %>
+    <li>
+      <strong>Company:</strong>
+      <%- if contact.company_url.present? %>
+        <%= link_to contact.company_url, contact.company %>
+      <%- else %>
+        <%= contact.company %>
+      <%- end %>
+    </li>
+  <%- if contact.phone.present? %>
+    <li><strong>Phone:</strong> <%= contact.phone %></li>
+  <%- end %>
+  <%- contact.others.each do |k,v| %>
+    <li><strong><%= k.titleize %>:</strong> <%= v %></li>
+  <%- end %>
+  </ul>
+  
+  <span class='actions'>
+    <%= link_to refinery_icon_tag("delete.png"), admin_contact_path(contact),
+        :class => "cancel confirm-delete",
+        :title => t('.delete'),
+        :confirm => t('message', :scope => 'shared.admin.delete', :title => contact.name),
+        :method => :delete %>
+  </span>
+</li>

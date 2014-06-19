@@ -1,0 +1,25 @@
+New Web Site Contact Message
+============================
+
+Request Type:
+    <%= @contact.others["is_demo"] ? "Demo" : "General" %>
+  
+Requestor:
+    <%= @contact.name %> <<%= @contact.email %>>
+
+Company:
+    <%= @contact.company %>
+    <%- if @contact.company_url.present? %><%= @contact.company_url %><%- end %>
+
+<%- if @contact.phone.present? %>
+Phone:
+    <%= @contact.phone %>
+<%- end %>
+
+<%- @contact.others.each do |k,v| %>
+<%- next if k == "is_demo" %>
+<%= k.titleize %>:
+    <%= word_wrap(v, :line_width => 68).gsub("\n", "\n    ") %>
+
+<%- end %>
+

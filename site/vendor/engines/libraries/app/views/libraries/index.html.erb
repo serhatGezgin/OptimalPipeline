@@ -1,0 +1,19 @@
+<div class="container_12">
+  <div class="grid_8">
+    <h1>Libraries</h1>
+    <ul id="libraries">
+      <% @libraries.each do |library| %>
+        <li>
+          <%= library.name %>
+          <% if library.library_resources.any? %>
+          <ul>
+            <% library.library_resources.each do |r| %>
+            <li><%= link_to r.resource.file_name, r.resource.url %></li>
+            <% end %>
+          </ul>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

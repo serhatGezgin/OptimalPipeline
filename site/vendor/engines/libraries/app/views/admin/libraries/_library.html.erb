@@ -1,0 +1,17 @@
+<li class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(library) -%>">
+  <span class='title'>
+    <%= library.name %><% unless library.public %> <em>(hidden)</em><% end %>
+    <span class="preview">&nbsp;</span>
+  </span>
+  <span class='actions'>
+    <%= link_to refinery_icon_tag("page_white_put.png"), resources_admin_library_path(library),
+         :title => "Manage files in this library" %>
+    <%= link_to refinery_icon_tag("application_edit.png"), edit_admin_library_path(library),
+         :title => t('.edit') %>
+    <%= link_to refinery_icon_tag("delete.png"), admin_library_path(library),
+        :class => "cancel confirm-delete",
+        :title => t('.delete'),
+        :confirm => t('message', :scope => 'shared.admin.delete', :title => library.name),
+        :method => :delete %>
+  </span>
+</li>

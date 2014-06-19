@@ -1,0 +1,10 @@
+<%- if contact.errors.any? %>
+  <div class="form_errors">
+    <p>There were were some problems with your submission...</p>
+    <ul>
+    <%- contact.errors.each_full do |error| %>
+      <li><%= error %></li>
+    <%- end %>
+    </ul>
+  </div>
+<%- end %>

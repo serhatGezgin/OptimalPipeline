@@ -1,0 +1,7 @@
+<h3>Libraries</h3>
+<ul id="libraries">
+  <% Library.public.each do |library| %>
+  <li><%= link_to library.name, library_path(library) %></li>
+  <% end %>
+  <li><%= link_to "Links", library_path("links") %></li>
+</ul>

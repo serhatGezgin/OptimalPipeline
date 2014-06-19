@@ -1,0 +1,11 @@
+<li>
+  <%= link_to menu_branch.title, menu_branch.url -%>
+  <% if (children = menu_branch.children unless hide_children).present? -%>
+  <div>
+    <ul>
+      <%= render :partial => '/shared/menu_branch', :collection => children,
+                 :locals => { :hide_children => !!hide_children } -%>
+    </ul>
+  </div>
+  <% end -%>
+</li>

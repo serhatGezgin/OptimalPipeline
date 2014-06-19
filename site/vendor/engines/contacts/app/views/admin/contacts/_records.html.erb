@@ -1,0 +1,7 @@
+<% if @contacts.any? %>
+  <ul id="contacts">
+    <%= render :partial => 'contacts' %>
+  </ul>
+<% else %>
+  <p><strong>There are no contact messages pending.</strong></p>
+<% end %>

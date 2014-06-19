@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>New Web Site Contact Message</h1>
+    <dl>
+      <dt><strong>Request Type</strong></dt>
+      <dd><%= @contact.others["is_demo"] ? "Demo" : "General" %></dd>
+      
+      <dt><strong>Requestor</strong></dt>
+      <dd><%= mail_to @contact.email, @contact.name %> <%= "(#{@contact.title})" if @contact.title.present? %></dd>
+      
+      <dt><strong>Company</strong></dt>
+      <dd>
+        <%- if @contact.company_url.present? %>
+          <%= link_to @contact.company_url, @contact.company %>
+        <%- else %>
+          <%= @contact.company %>
+        <%- end %>
+      </dd>
+    
+    <%- if @contact.phone.present? %>
+      <dt><strong>Phone</strong></dt>
+      <dd><%= @contact.phone %></dd>
+    <%- end %>
+    
+    <%- @contact.others.each do |k,v| %>
+    <%- next if k == "is_demo" %>
+      <dt><strong><%= k.titleize %></strong></dt>
+      <dd><%= v %></dd>
+    <%- end %>
+    </dl>
+  </body>
+</html>

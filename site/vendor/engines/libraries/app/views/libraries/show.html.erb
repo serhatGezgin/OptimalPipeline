@@ -1,0 +1,20 @@
+<div class="container_12">
+  <div id="content" class="grid_8 push_4">
+    <h1><%= @library.name %></h1>
+    <div class="byline"><%=raw @library.short_desc %></div>
+      <% @library.library_resources.each do |res| %>
+      <div class="library_file <%= library_file_type_class(res) %>">
+        <a href="<%= res.resource.url %>">
+          <%= res.resource.file_name %>
+          <span>Download</span>
+        </a>
+        <div class="description">
+          <%=raw res.description %>
+        </div>  
+      </div>
+      <% end %>
+  </div>
+  <div id="sidebar" class="grid_4 pull_8">
+    <%= render(:partial => "list") %>
+  </div>
+</div>

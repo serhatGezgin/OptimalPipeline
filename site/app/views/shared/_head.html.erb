@@ -1,0 +1,19 @@
+<head>
+  <meta charset='<%= ::Refinery::Application.config.encoding %>' />
+  <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /><![endif]-->
+  <title><%= browser_title(yield(:title)) %></title>
+  <%= raw "<meta name=\"description\" content=\"#{@meta.meta_description}\" />" if @meta.meta_description.present? -%>
+  <%= raw "<meta name=\"keywords\" content=\"#{@meta.meta_keywords}\">" if @meta.meta_keywords.present? -%>
+  <%= csrf_meta_tag if RefinerySetting.find_or_set(:authenticity_token_on_frontend, true)-%>
+  <%= yield :meta %>
+  <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" %>
+  <%= javascript_include_tag "jquery.simplemodal.1.4.2.min", :cache => "app" %>
+  <link href='http://fonts.googleapis.com/css?family=Ubuntu+Condensed' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag("reset", "text", "960_12_col", "screen", :media => "screen", :cache => "app") %>
+  <script type="text/javascript">
+    $(document).on('click', 'a.imgzoom', function(event) {
+      event.preventDefault();
+      $.modal($($(this).attr("href")), {overlayClose:true});
+    });
+  </script>
+</head>

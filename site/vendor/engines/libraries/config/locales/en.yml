@@ -1,0 +1,25 @@
+en:
+  shared:
+    admin:
+      image_picker:
+        image: 'image'
+  plugins:
+    libraries:
+      title: 'Library'
+  admin:
+    libraries:
+      actions:
+        create_new: 'Add New Library'
+        reorder: 'Reorder Libraries'
+        reorder_done: 'Done Reordering Libraries'
+      records:
+        title: 'Library'
+        sorry_no_results: 'Sorry! There are no results found.'
+        no_items_yet: 'There are no Libraries yet. Click "Add New Library" to add your first library.'
+      library:
+        view_live_html: 'View this library live <br/><em>(opens in a new window)</em>'
+        edit: 'Edit this library'
+        delete: 'Remove this library forever'
+  libraries:
+    show:
+      other: 'Other Libraries'

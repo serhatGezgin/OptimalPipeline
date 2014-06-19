@@ -1,0 +1,46 @@
+<section id="records">
+  <h2>Resources for Library &quot;<%= @library.name %>&quot;</h2>
+  <%- if @library.resources.any? %>
+  <ul id="sortable_list" class="ui-sortable">
+    <%- @library.library_resources.each do |r| %>
+    <li class="clearfix record no-nest" id="resource_<%= r.id %>">
+      <span class="title"><%= r.resource.file_name %></span>
+      <span class="actions">
+        <%= link_to refinery_icon_tag("delete.png"), rem_resource_admin_library_path(@library, :res_id => r.id),
+            :class => "cancel confirm-delete",
+            :title => "Removes this resource from the library.",
+            :confirm => "Are you sure you want to remove this resource from the library?",
+            :method => :delete %>
+      </span>
+      <span class="description">&quot;<%= r.description %>&quot;</span>
+    </li>
+    <%- end %>
+  </ul>
+  <%- else %>
+  <p>There are no resources associated with this Library.</p>
+  <%- end %>
+</section>
+<aside id="actions">
+  <ul>
+    <li><%= link_to "Back to Libraries", admin_libraries_path %></li>
+    <li><a href="<%= new_resource_admin_library_path(@library) %>" class="add_icon">Add Resource to Library</a></li>
+    <li><a href="<%= resources_admin_library_path(@library) %>" class="reorder_icon" id="reorder_action">Reorder Resources</a></li>
+    <li><a href="<%= resources_admin_library_path(@library) %>" class="reorder_icon" id="reorder_action_done" style="display:none;">Done Reordering Resources</a></li>
+  </ul>
+</aside>
+
+<% content_for :after_javascript_libraries do %>
+  <%= javascript_include_tag 'refinery/nestedsortables' %>
+  <%= javascript_include_tag 'refinery/serializelist' %>
+<% end %>
+
+<% content_for :javascripts do %>
+  <script>
+    $(document).ready(function(){
+      list_reorder.update_url     = "<%= reorder_resources_admin_library_path(@library) %>";
+      list_reorder.sortable_list  = $("#sortable_list");
+      list_reorder.tree           = false;
+      list_reorder.init();
+    });
+  </script>
+<% end %>

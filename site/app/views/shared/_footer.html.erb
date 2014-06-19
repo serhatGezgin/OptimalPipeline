@@ -1,0 +1,15 @@
+<%-
+  footer_page = Page.by_title("Footer").first
+  footer_text = (footer_page.present?) ? footer_page.content_for(:body) : ""
+-%>
+<div id="footer">
+  <div class="container_12">
+    <div class="grid_8">
+    <%- if footer_page.present? %>
+      <%=raw footer_page.content_for(:body) %>
+    <%- end %>
+      &nbsp;
+    </div>
+    <div class="grid_4 watermark">&nbsp;</div>
+  </div>
+</div>

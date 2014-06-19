@@ -1,0 +1,38 @@
+<%-
+  # Try to get a page "Contact Us" and use it's content in the sidebar later.
+  contact_us_page = Page.by_title("Contact Us").first
+%>
+<div class="container_12">
+  <div id="content" class="grid_8 push_4">
+    <h1>Contact Us</h1>
+    <div class="byline">
+      Please fill in the form below and we'll be glad to get back to you.
+      Fields with an asterisk (*) are required.
+    </div>
+    
+    <%= render(:partial => "form_errors", :locals => { :contact => @contact })%>
+    
+    <%- form_for(@contact, :url => "/contact/submit") do |f| %>
+      <%= render(:partial => "main_fields", :locals => { :f => f }) %>
+      
+      <div class="form_field">
+        <%= label_tag("contact[inquiry]", "Inquiry") %>
+        <%= text_area_tag("contact[inquiry]", @contact.other("inquiry")) %>
+      </div>
+
+      <div class="form_field">
+        <%= label_tag("recaptcha_response_field", "Prove You are Human") %>
+        <%= recaptcha_tags(:display => {:theme => 'white'}) %>
+      </div>
+      
+      <div class="form_control">
+        <%= f.submit("Submit") %>
+      </div>
+    <%- end %>
+  </div>
+  <div id="sidebar" class="grid_4 pull_8">
+    <%- if contact_us_page.present? %>
+    <%=raw contact_us_page.content_for(:sidebar) %>
+    <%- end %>
+  </div>
+</div>
